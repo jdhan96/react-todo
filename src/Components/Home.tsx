@@ -1,8 +1,8 @@
-import React from 'react';
-import { List } from '@material-ui/core';
-import TodoItem from './TodoItem';
-import Todo from '../models/Todo';
-import CreateTodo from './CreateTodo';
+import React from "react";
+import { List } from "@material-ui/core";
+import TodoItem from "./TodoItem";
+import Todo from "../models/Todo";
+import CreateTodo from "./CreateTodo";
 
 export default function Home() {
   const [todos, setTodos] = React.useState<Todo[]>([]);
@@ -13,11 +13,17 @@ export default function Home() {
   }
 
   const todoList = todos.map((todo, index) => (
-    <TodoItem key={index} todo={todo} />
+    <TodoItem key={index} todo={todo} onChange={deleteTodo} />
   ));
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  function deleteTodo(todoIndex: number) {
+    const newTodos = [...todos];
+    newTodos.splice(todoIndex, 1);
+    setTodos(newTodos);
+  }
 
   return (
     <React.Fragment>

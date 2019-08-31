@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   ListItem,
   Card,
@@ -6,11 +6,13 @@ import {
   Typography,
   CardActions,
   Checkbox
-} from '@material-ui/core';
-import Todo from '../models/Todo';
+} from "@material-ui/core";
+import Todo from "../models/Todo";
 
 interface TodoProp {
+  key: number;
   todo: Todo;
+  onChange(index: number): void;
 }
 
 export default function TodoItem(props: TodoProp) {
@@ -18,7 +20,10 @@ export default function TodoItem(props: TodoProp) {
   const handleToggle = (
     event: React.ChangeEvent<HTMLInputElement>,
     isComplete: boolean
-  ) => setTodo({ ...todo, isComplete: isComplete });
+  ) => {
+    setTodo({ ...todo, isComplete: isComplete });
+    props.onChange(props.key);
+  };
 
   return (
     <ListItem alignItems="flex-start">
